@@ -1,7 +1,7 @@
 package com.tikalk.mobileevent.mobileevent
 
-interface BaseView<T> {
+interface BaseView<P: BasePresenter> {
 
-    var presenter: T?
+    var presenter: P?
 
 }
