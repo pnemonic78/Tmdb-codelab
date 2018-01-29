@@ -43,4 +43,6 @@ ext {
     junit_version = '4.12'
     espresso_version = '3.0.0'
     constraint_layout_version = '1.0.2'
+    retrofit2_version = '2.3.0'
+    okhttp3_version = '3.9.1'
 }
