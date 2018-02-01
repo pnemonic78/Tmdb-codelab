@@ -1,21 +1,33 @@
 package com.tmdbcodlab.android.model
 
-import com.google.gson.annotations.SerializedName
-
 /**
  * Created by ronelg on 12/19/17.
  */
-data class Movie(@SerializedName("id") val id: Long,
-                 @SerializedName("poster_path") val posterPath: String?,
-                 @SerializedName("adult") val adult: Boolean,
-                 @SerializedName("overview") val overview: String,
-                 @SerializedName("release_date") val releaseDate: String,
-                 @SerializedName("genre_ids") val genreIds: Array<Long>,
-                 @SerializedName("original_title") val original_title: String,
-                 @SerializedName("original_language") val originalLanguage: String,
-                 @SerializedName("title") val title: String,
-                 @SerializedName("backdrop_path") val backdropPath: String?,
-                 @SerializedName("popularity") val popularity: Float,
-                 @SerializedName("vote_count") val voteCount: Integer,
-                 @SerializedName("video") val video: Boolean,
-                 @SerializedName("vote_average") val voteAverage: Float)
+data class Movie(override var id: Long,
+                 override var adult: Boolean,
+                 override var backdropPath: String?,
+                 override var genreIds: Array<Long>,
+                 override var originalLanguage: String,
+                 override var originalTitle: String,
+                 override var overview: String?,
+                 override var popularity: Float,
+                 override var posterPath: String?,
+                 override var releaseDate: String,
+                 override var title: String,
+                 override var video: Boolean,
+                 override var voteAverage: Float,
+                 override var voteCount: Int) :
+        MovieBase(id,
+                adult,
+                backdropPath,
+                genreIds,
+                originalLanguage,
+                originalTitle,
+                overview,
+                popularity,
+                posterPath,
+                releaseDate,
+                title,
+                video,
+                voteAverage,
+                voteCount)

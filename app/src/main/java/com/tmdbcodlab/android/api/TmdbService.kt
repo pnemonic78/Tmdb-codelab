@@ -1,7 +1,7 @@
 package com.tmdbcodlab.android.api
 
 import com.tmdbcodlab.android.model.Movie
-import io.reactivex.Single
+import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -15,6 +15,6 @@ interface TmdbService {
     fun getMoviesNowPlaying(@Query("api_key") apiKey: String,
                             @Query("language") language: String?,
                             @Query("page") page: Int? = 1,
-                            @Query("region") region: String?): Single<List<Movie>>
+                            @Query("region") region: String?): Observable<List<Movie>>
 
 }
