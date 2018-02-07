@@ -49,19 +49,27 @@ dependencies {
     implementation "com.jakewharton.rxbinding2:rxbinding:$rxkbinding2_version"
     implementation "com.jakewharton.rxbinding2:rxbinding-appcompat-v7:$rxkbinding2_version"
 
+    //Dagger
+    implementation "com.google.dagger:dagger:$dagger2_version"
+    implementation "com.google.dagger:dagger-android:$dagger2_version"
+    implementation "com.google.dagger:dagger-android-support:$dagger2_version"
+    kapt "com.google.dagger:dagger-android-processor:$dagger2_version"
+    kapt "com.google.dagger:dagger-compiler:$dagger2_version"
+
     //Sqlbrite 2
     implementation "com.squareup.sqlbrite2:sqlbrite-kotlin:$sqlbrite2_version"
 
     implementation "com.jakewharton.timber:timber:$timber_version"
 
     //rxPermissions
-    compile 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.4@aar'
+    implementation 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.4@aar'
 
     // Retrofit2
-    compile "com.squareup.retrofit2:retrofit:$retrofit2_version"
-    compile "com.squareup.retrofit2:converter-gson:$retrofit2_version"
-    compile "com.squareup.okhttp3:okhttp:$okhttp3_version"
-    compile "com.squareup.okhttp3:logging-interceptor:$okhttp3_version"
+    implementation "com.squareup.retrofit2:retrofit:$retrofit2_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit2_version"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit2_version"
+    implementation "com.squareup.okhttp3:okhttp:$okhttp3_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp3_version"
 
     //Test
     androidTestImplementation("com.android.support.test.espresso:espresso-core:$espresso_version", {
