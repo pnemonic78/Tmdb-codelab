@@ -12,10 +12,7 @@ import com.tmdbcodlab.android.R
  */
 class MoviesFragment : Fragment(), MoviesContract.View {
 
-    override var presenter: MoviesContract.Presenter?
-        get() = TODO(
-                "not implemented") //To change initializer of created properties use File | Settings | File Templates.
-        set(value) {}
+    override var presenter: MoviesContract.Presenter? = null
 
     override fun setLoadingIndicator(active: Boolean) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
@@ -23,5 +20,15 @@ class MoviesFragment : Fragment(), MoviesContract.View {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_movies, container, false)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        presenter?.subscribe()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        presenter?.unsubscribe()
     }
 }

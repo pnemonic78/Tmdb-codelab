@@ -11,14 +11,21 @@ import com.tmdbcodlab.android.ui.movies.MoviesContract
 /**
  * Created by ronelg on 12/19/17.
  */
-class MovieDetailFragment: Fragment(), MovieDetailsContract.View {
+class MovieDetailFragment : Fragment(), MovieDetailsContract.View {
 
-    override var presenter: MovieDetailsContract.Presenter?
-        get() = TODO(
-                "not implemented") //To change initializer of created properties use File | Settings | File Templates.
-        set(value) {}
+    override var presenter: MovieDetailsContract.Presenter? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_details, container, false)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        presenter?.subscribe()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        presenter?.unsubscribe()
     }
 }
