@@ -8,12 +8,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.tmdbcodlab.android.R
+import com.tmdbcodlab.android.data.TmdbRepository
 import com.tmdbcodlab.android.inject.components.DaggerApplicationComponent
+import com.tmdbcodlab.android.model.Movie
+import javax.inject.Inject
 
 /**
  * Created by ronelg on 12/19/17.
  */
 class MoviesFragment : Fragment(), MoviesContract.View {
+
+    @Inject
+    lateinit var repository: TmdbRepository
 
     override var presenter: MoviesContract.Presenter? = null
     private var progressBar: ContentLoadingProgressBar? = null
@@ -22,6 +28,7 @@ class MoviesFragment : Fragment(), MoviesContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         DaggerApplicationComponent.create().inject(this)
+        presenter = MoviesPresenter(repository, this)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -54,6 +61,10 @@ class MoviesFragment : Fragment(), MoviesContract.View {
 
     private fun initList(list: RecyclerView) {
         list.adapter = adapter
+    }
+
+    override fun showMovies(data: List<Movie>) {
+        adapter.setItems(data)
     }
 
     companion object {
