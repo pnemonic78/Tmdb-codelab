@@ -33,4 +33,10 @@ class MovieDetailFragment : Fragment(), MovieDetailsContract.View {
         super.onPause()
         presenter?.unsubscribe()
     }
+
+    companion object {
+        fun newInstance(): MovieDetailFragment {
+            return MovieDetailFragment()
+        }
+    }
 }
