@@ -4,6 +4,8 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import com.tmdbcodlab.android.R
 import com.tmdbcodlab.android.model.Movie
@@ -37,9 +39,16 @@ class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.MovieViewHolder>() {
 
     inner class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val title: TextView = itemView.findViewById(android.R.id.title)
+        private val summary: TextView = itemView.findViewById(android.R.id.summary)
+        private val popularity: ProgressBar = itemView.findViewById(android.R.id.progress)
+        private val poster: ImageView = itemView.findViewById(R.id.poster)
+        private val date: TextView = itemView.findViewById(R.id.date)
 
         fun bind(movie: Movie) {
             title.text = movie.title
+            summary.text = movie.overview
+            popularity.progress = (movie.voteAverage * 10f).toInt()
+            date.text = movie.releaseDate
 
 //            val context = itemView.context
 //        holder.sourceName.text = source.name
