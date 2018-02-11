@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.tmdbcodlab.android.R
-import com.tmdbcodlab.android.ui.movies.MoviesContract
+import com.tmdbcodlab.android.inject.components.DaggerApplicationComponent
 
 /**
  * Created by ronelg on 12/19/17.
@@ -14,6 +14,11 @@ import com.tmdbcodlab.android.ui.movies.MoviesContract
 class MovieDetailFragment : Fragment(), MovieDetailsContract.View {
 
     override var presenter: MovieDetailsContract.Presenter? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        DaggerApplicationComponent.create().inject(this)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_details, container, false)
