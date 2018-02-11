@@ -1,7 +1,7 @@
 package com.tmdbcodlab.android.ui.moviedetails
 
-import com.tikalk.mobileevent.mobileevent.BasePresenter
-import com.tikalk.mobileevent.mobileevent.BaseView
+import com.tmdbcodlab.android.BasePresenter
+import com.tmdbcodlab.android.BaseView
 
 /**
  * Created by ronelg on 12/19/17.

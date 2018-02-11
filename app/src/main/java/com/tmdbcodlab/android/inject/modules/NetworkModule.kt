@@ -1,4 +1,4 @@
-package com.knews.android.di.modules
+package com.tmdbcodlab.android.inject.modules
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder

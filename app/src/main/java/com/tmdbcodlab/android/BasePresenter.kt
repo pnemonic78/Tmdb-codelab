@@ -1,4 +1,4 @@
-package com.tikalk.mobileevent.mobileevent
+package com.tmdbcodlab.android
 
 interface BasePresenter {
 

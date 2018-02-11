@@ -1,6 +1,6 @@
-package com.knews.android.di.modules
+package com.tmdbcodlab.android.inject.modules
 
-import com.tmdbcodlab.android.MyApplication
+import android.content.Context
 import com.tmdbcodlab.android.data.TmdbRepository
 import com.tmdbcodlab.android.data.source.local.TmdbLocalDataSource
 import com.tmdbcodlab.android.data.source.remote.TmdbRemoteDataSource
@@ -9,15 +9,14 @@ import dagger.Provides
 import javax.inject.Singleton
 
 @Module
-class ApplicationModule(/*val application: MyApplication*/) {
+class ApplicationModule(val context: Context) {
 
-//    @Provides
-//    @Singleton
-//    fun provideApplication() = application
+    @Provides
+    fun provideContext() = context
 
     @Provides
     @Singleton
-    fun provideLocalDataSource() = TmdbLocalDataSource()
+    fun provideLocalDataSource(context: Context) = TmdbLocalDataSource(context)
 
     @Provides
     @Singleton
