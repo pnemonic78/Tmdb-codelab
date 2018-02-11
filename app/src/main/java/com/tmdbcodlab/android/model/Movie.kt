@@ -1,33 +1,21 @@
 package com.tmdbcodlab.android.model
 
+import com.google.gson.annotations.SerializedName
+
 /**
  * Created by ronelg on 12/19/17.
  */
-data class Movie(override var id: Long,
-                 override var adult: Boolean,
-                 override var backdropPath: String?,
-                 override var genreIds: Array<Long>,
-                 override var originalLanguage: String,
-                 override var originalTitle: String,
-                 override var overview: String?,
-                 override var popularity: Float,
-                 override var posterPath: String?,
-                 override var releaseDate: String,
-                 override var title: String,
-                 override var video: Boolean,
-                 override var voteAverage: Float,
-                 override var voteCount: Int) :
-        MovieBase(id,
-                adult,
-                backdropPath,
-                genreIds,
-                originalLanguage,
-                originalTitle,
-                overview,
-                popularity,
-                posterPath,
-                releaseDate,
-                title,
-                video,
-                voteAverage,
-                voteCount)
+data class Movie(@SerializedName("id") var id: Long,
+                 @SerializedName("adult") var adult: Boolean,
+                 @SerializedName("backdrop_path") var backdropPath: String?,
+                 @SerializedName("genre_ids") var genreIds: List<Long>,
+                 @SerializedName("original_language") var originalLanguage: String,
+                 @SerializedName("original_title") var originalTitle: String,
+                 @SerializedName("overview") var overview: String?,
+                 @SerializedName("popularity") var popularity: Float,
+                 @SerializedName("poster_path") var posterPath: String?,
+                 @SerializedName("release_date") var releaseDate: String,
+                 @SerializedName("title") var title: String,
+                 @SerializedName("video") var video: Boolean,
+                 @SerializedName("vote_average") var voteAverage: Float,
+                 @SerializedName("vote_count") var voteCount: Int)
