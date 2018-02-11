@@ -18,7 +18,7 @@ import javax.inject.Singleton
 @Module
 class NetworkModule {
 
-    private val BASE_URL = "https://www.themoviedb.org/"
+    private val BASE_URL = "https://api.themoviedb.org/3"
 
     @Provides
     internal fun provideGson(): Gson {
