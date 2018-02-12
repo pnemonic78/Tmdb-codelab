@@ -1,6 +1,7 @@
 package com.tmdbcodlab.android.model
 
 import com.google.gson.annotations.SerializedName
+import java.util.Date
 
 /**
  * Created by ronelg on 12/19/17.
@@ -19,7 +20,7 @@ data class MovieDetails(@SerializedName("id") var id: Long,
                         @SerializedName("poster_path") var posterPath: String?,
                         @SerializedName("production_companies") var productionCompanies: List<ProductionCompany>,
                         @SerializedName("production_countries") var productionCountries: List<ProductionCountry>,
-                        @SerializedName("release_date") var releaseDate: String,
+                        @SerializedName("release_date") var releaseDate: Date,
                         @SerializedName("revenue") var revenue: Int?,
                         @SerializedName("runtime") var runtime: Int?,
                         @SerializedName("spoken_languages") var spokenLanguages: List<SpokenLanguage>,
