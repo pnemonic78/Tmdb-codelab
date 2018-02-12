@@ -50,8 +50,8 @@ class TmdbApi {
         }
 
         fun generatePosterUrl(path: String?, target: ImageView): String? {
-            var targetWidth = target.width
-            var targetHeight = target.height
+            var targetWidth = target.measuredWidth
+            var targetHeight = target.measuredHeight
             val lp = target.layoutParams
             if (targetWidth <= 0) {
                 targetWidth = lp.width

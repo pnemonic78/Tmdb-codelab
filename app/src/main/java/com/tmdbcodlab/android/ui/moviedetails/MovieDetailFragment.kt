@@ -7,6 +7,7 @@ import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -94,7 +95,18 @@ class MovieDetailFragment : Fragment(), MovieDetailsContract.View {
         popularity!!.progress = (movie.voteAverage * 10f).toInt()
         date!!.text = DateUtils.formatDateTime(context, movie.releaseDate.time, DateUtils.FORMAT_SHOW_DATE)
 
-        TmdbApi.showPoster(movie, poster!!)
+        val imageView = poster!!
+        if (imageView.measuredWidth > 0) {
+            TmdbApi.showPoster(movie, imageView)
+        } else {
+            val listener = object : ViewTreeObserver.OnGlobalLayoutListener {
+                override fun onGlobalLayout() {
+                    imageView.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                    TmdbApi.showPoster(movie, imageView)
+                }
+            }
+            imageView.viewTreeObserver.addOnGlobalLayoutListener(listener)
+        }
     }
 
     companion object {
