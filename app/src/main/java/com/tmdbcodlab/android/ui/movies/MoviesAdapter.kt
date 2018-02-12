@@ -15,14 +15,9 @@ import com.tmdbcodlab.android.model.Movie
 /**
  * @author moshe on 2018/02/11.
  */
-class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.MovieViewHolder>() {
+class MoviesAdapter(var listener: MovieListener? = null) : RecyclerView.Adapter<MoviesAdapter.MovieViewHolder>() {
 
     var data: List<Movie> = emptyList()
-
-    fun setItems(items: List<Movie>) {
-        this.data = items
-        notifyDataSetChanged()
-    }
 
     override fun getItemCount(): Int {
         return data.size
@@ -39,14 +34,31 @@ class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.MovieViewHolder>() {
         holder.bind(source)
     }
 
-    inner class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    fun setItems(items: List<Movie>) {
+        this.data = items
+        notifyDataSetChanged()
+    }
+
+    fun setMovieListener(listener: MovieListener) {
+        this.listener = listener
+    }
+
+    interface MovieListener {
+        fun onMovieClicked(movie: Movie)
+    }
+
+    inner class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
+
         private val title: TextView = itemView.findViewById(android.R.id.title)
         private val summary: TextView = itemView.findViewById(android.R.id.summary)
         private val popularity: ProgressBar = itemView.findViewById(android.R.id.progress)
         private val poster: ImageView = itemView.findViewById(R.id.poster)
         private val date: TextView = itemView.findViewById(R.id.date)
 
+        private var movie: Movie? = null
+
         fun bind(movie: Movie) {
+            this.movie = movie
             val context = itemView.context
 
             title.text = movie.title
@@ -55,6 +67,14 @@ class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.MovieViewHolder>() {
             date.text = DateUtils.formatDateTime(context, movie.releaseDate.time, DateUtils.FORMAT_SHOW_DATE)
 
             TmdbApi.showPoster(movie, poster)
+
+            itemView.setOnClickListener(this)
+        }
+
+        override fun onClick(v: View?) {
+            if ((v == itemView) && (movie != null)) {
+                listener?.onMovieClicked(movie!!)
+            }
         }
     }
 }

@@ -2,6 +2,7 @@ package com.tmdbcodlab.android.ui.movies
 
 import android.util.Log
 import com.tmdbcodlab.android.data.source.TmdbDataSource
+import com.tmdbcodlab.android.model.Movie
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -22,7 +23,6 @@ class MoviesPresenter(private val repository: TmdbDataSource,
     private val disposables: CompositeDisposable = CompositeDisposable()
 
     override fun subscribe() {
-        view.setLoadingIndicator(true)
         loadMovies(false)
     }
 
@@ -31,16 +31,23 @@ class MoviesPresenter(private val repository: TmdbDataSource,
     }
 
     override fun loadMovies(forceUpdate: Boolean) {
+        view.showLoadingIndicator(true)
+
         val disposable = repository.getMoviesNowPlaying()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe({ res ->
                     view.showMovies(res)
+                    view.showLoadingIndicator(false)
                 }, { t ->
-                    Log.e(TAG, "getMoviesNowPlaying error: $t")
+                    Log.e(TAG, "loadMovies error: $t")
+                    view.showLoadingIndicator(false)
                 })
 
         disposables.add(disposable)
     }
 
+    override fun onMovieClicked(movie: Movie) {
+        view.showMovieDetails(movie)
+    }
 }

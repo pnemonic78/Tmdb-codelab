@@ -4,6 +4,7 @@ import com.tmdbcodlab.android.data.source.TmdbDataSource
 import com.tmdbcodlab.android.data.source.local.TmdbLocalDataSource
 import com.tmdbcodlab.android.data.source.remote.TmdbRemoteDataSource
 import com.tmdbcodlab.android.model.Movie
+import com.tmdbcodlab.android.model.MovieDetails
 import io.reactivex.Observable
 
 /**
@@ -15,5 +16,9 @@ class TmdbRepository(private val localRepository: TmdbLocalDataSource,
 
     override fun getMoviesNowPlaying(): Observable<List<Movie>> {
         return localRepository.getMoviesNowPlaying()
+    }
+
+    override fun getMovieDetails(movieId: Long): Observable<MovieDetails> {
+        return localRepository.getMovieDetails(movieId)
     }
 }

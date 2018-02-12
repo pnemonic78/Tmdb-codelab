@@ -11,13 +11,17 @@ interface MoviesContract {
 
     interface View : BaseView<Presenter> {
 
-        fun setLoadingIndicator(active: Boolean)
+        fun showLoadingIndicator(active: Boolean)
 
         fun showMovies(data: List<Movie>)
+
+        fun showMovieDetails(movie: Movie)
     }
 
     interface Presenter : BasePresenter {
 
         fun loadMovies(forceUpdate: Boolean)
+
+        fun onMovieClicked(movie: Movie)
     }
 }

@@ -17,14 +17,14 @@ import javax.inject.Inject
 /**
  * Created by ronelg on 12/19/17.
  */
-class MoviesFragment : Fragment(), MoviesContract.View {
+class MoviesFragment : Fragment(), MoviesContract.View, MoviesAdapter.MovieListener {
 
     @Inject
     lateinit var repository: TmdbRepository
 
     override var presenter: MoviesContract.Presenter? = null
     private var progressBar: ContentLoadingProgressBar? = null
-    private val adapter: MoviesAdapter = MoviesAdapter()
+    private val adapter: MoviesAdapter = MoviesAdapter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,7 +52,7 @@ class MoviesFragment : Fragment(), MoviesContract.View {
         presenter?.unsubscribe()
     }
 
-    override fun setLoadingIndicator(active: Boolean) {
+    override fun showLoadingIndicator(active: Boolean) {
         if (active) {
             progressBar?.show()
         } else {
@@ -66,6 +66,14 @@ class MoviesFragment : Fragment(), MoviesContract.View {
 
     override fun showMovies(data: List<Movie>) {
         adapter.setItems(data)
+    }
+
+    override fun onMovieClicked(movie: Movie) {
+        presenter?.onMovieClicked(movie)
+    }
+
+    override fun showMovieDetails(movie: Movie) {
+        (activity as MoviesActivity).showMovieDetails(movie)
     }
 
     companion object {
