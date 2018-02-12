@@ -2,10 +2,16 @@ package com.tmdbcodlab.android.ui.moviedetails
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.widget.ContentLoadingProgressBar
+import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.ProgressBar
+import android.widget.TextView
 import com.tmdbcodlab.android.R
+import com.tmdbcodlab.android.api.TmdbApi
 import com.tmdbcodlab.android.data.TmdbRepository
 import com.tmdbcodlab.android.inject.components.DaggerApplicationComponent
 import com.tmdbcodlab.android.inject.modules.ApplicationModule
@@ -22,6 +28,12 @@ class MovieDetailFragment : Fragment(), MovieDetailsContract.View {
 
     override var presenter: MovieDetailsContract.Presenter? = null
     private var movieId: Long? = null
+    private var progressBar: ContentLoadingProgressBar? = null
+    private var title: TextView? = null
+    private var summary: TextView? = null
+    private var popularity: ProgressBar? = null
+    private var poster: ImageView? = null
+    private var date: TextView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +46,14 @@ class MovieDetailFragment : Fragment(), MovieDetailsContract.View {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        //TODO butterknife
+        super.onViewCreated(view, savedInstanceState)
+        progressBar = view.findViewById(android.R.id.progress)
+
+        title = view.findViewById(android.R.id.title)
+        summary = view.findViewById(android.R.id.summary)
+        popularity = view.findViewById(R.id.popularity)
+        poster = view.findViewById(R.id.poster)
+        date = view.findViewById(R.id.date)
     }
 
     override fun onStart() {
@@ -47,17 +66,35 @@ class MovieDetailFragment : Fragment(), MovieDetailsContract.View {
         presenter?.unsubscribe()
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (movieId != null) {
+            presenter?.loadMovie(movieId!!)
+        }
+    }
+
     fun setMovieId(movieId: Long) {
         this.movieId = movieId
         presenter?.loadMovie(movieId)
     }
 
     override fun showLoadingIndicator(active: Boolean) {
-        //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        if (active) {
+            progressBar?.show()
+        } else {
+            progressBar?.hide()
+        }
     }
 
     override fun showMovie(movie: MovieDetails) {
-        //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        this.movieId = null
+
+        title!!.text = movie.title
+        summary!!.text = movie.overview
+        popularity!!.progress = (movie.voteAverage * 10f).toInt()
+        date!!.text = DateUtils.formatDateTime(context, movie.releaseDate.time, DateUtils.FORMAT_SHOW_DATE)
+
+        TmdbApi.showPoster(movie, poster!!)
     }
 
     companion object {

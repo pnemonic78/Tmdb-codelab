@@ -51,7 +51,7 @@ class MoviesAdapter(var listener: MovieListener? = null) : RecyclerView.Adapter<
 
         private val title: TextView = itemView.findViewById(android.R.id.title)
         private val summary: TextView = itemView.findViewById(android.R.id.summary)
-        private val popularity: ProgressBar = itemView.findViewById(android.R.id.progress)
+        private val popularity: ProgressBar = itemView.findViewById(R.id.popularity)
         private val poster: ImageView = itemView.findViewById(R.id.poster)
         private val date: TextView = itemView.findViewById(R.id.date)
 
