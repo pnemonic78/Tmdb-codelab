@@ -42,15 +42,28 @@ class TmdbApi {
         }
 
         fun generatePosterUrl(movie: Movie, target: ImageView): String? {
-            return generatePosterUrl(target.context, movie.posterPath, target.width, target.height)
+            return generatePosterUrl(movie.posterPath, target)
         }
 
         fun generatePosterUrl(movie: MovieDetails, target: ImageView): String? {
-            return generatePosterUrl(target.context, movie.posterPath, target.width, target.height)
+            return generatePosterUrl(movie.posterPath, target)
+        }
+
+        fun generatePosterUrl(path: String?, target: ImageView): String? {
+            var targetWidth = target.width
+            var targetHeight = target.height
+            val lp = target.layoutParams
+            if (targetWidth <= 0) {
+                targetWidth = lp.width
+            }
+            if (targetHeight <= 0) {
+                targetHeight = lp.height
+            }
+            return generatePosterUrl(target.context, path, targetWidth, targetHeight)
         }
 
         fun generatePosterUrl(context: Context, path: String?, width: Int, height: Int): String? {
-            if ((path == null) || (width == 0) || (height == 0)) {
+            if ((path == null) || (width <= 0) || (height <= 0)) {
                 return null
             }
             if (posterSizes.isEmpty()) {
