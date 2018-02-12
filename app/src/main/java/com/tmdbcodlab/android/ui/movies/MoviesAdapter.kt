@@ -1,6 +1,7 @@
 package com.tmdbcodlab.android.ui.movies
 
 import android.support.v7.widget.RecyclerView
+import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,7 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import com.tmdbcodlab.android.R
+import com.tmdbcodlab.android.api.TmdbApi
 import com.tmdbcodlab.android.model.Movie
 
 /**
@@ -45,23 +47,14 @@ class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.MovieViewHolder>() {
         private val date: TextView = itemView.findViewById(R.id.date)
 
         fun bind(movie: Movie) {
+            val context = itemView.context
+
             title.text = movie.title
             summary.text = movie.overview
             popularity.progress = (movie.voteAverage * 10f).toInt()
-            date.text = movie.releaseDate
+            date.text = DateUtils.formatDateTime(context, movie.releaseDate.time, DateUtils.FORMAT_SHOW_DATE)
 
-//            val context = itemView.context
-//        holder.sourceName.text = source.name
-//        holder.sourceDescription.text = source.description
-//        Glide.with(context)
-//                .load(source.logo)
-//                .into(holder.sourceImage)
-//
-//        holder.itemView.setOnClickListener {
-//            val i = Intent(context, ArticlesActivity::class.java)
-//            i.putExtra("id", source.id)
-//            context.startActivity(i)
-//        }
+            TmdbApi.showPoster(movie, poster)
         }
     }
 }

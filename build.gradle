@@ -44,4 +44,5 @@ ext {
     constraint_layout_version = '1.0.2'
     retrofit2_version = '2.3.0'
     okhttp3_version = '3.9.1'
+    glide_version = '4.1.1'
 }
