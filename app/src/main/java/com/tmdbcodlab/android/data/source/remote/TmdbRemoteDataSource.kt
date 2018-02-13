@@ -12,10 +12,12 @@ import io.reactivex.Observable
 class TmdbRemoteDataSource(val service: TmdbService) : TmdbDataSource {
 
     override fun getMoviesNowPlaying(): Observable<List<Movie>> {
-        return service.getMoviesNowPlaying().map { it.results }
+        return service.getMoviesNowPlaying()
+                .map { it.results }
+                .cache()
     }
 
     override fun getMovieDetails(movieId: Long): Observable<MovieDetails> {
-        return service.getMovieDetails(movieId)
+        return service.getMovieDetails(movieId).cache()
     }
 }
