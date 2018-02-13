@@ -78,12 +78,12 @@ class TmdbApi {
             for (size in sizes) {
                 if (size.startsWith("w")) {
                     var posterWidth = size.substring(1).toInt()
-                    if (width <= posterWidth) {
+                    if (width <= (posterWidth + (posterWidth shr 2))) {
                         return size
                     }
                 } else if (size.startsWith("h")) {
                     var posterHeight = size.substring(1).toInt()
-                    if (height <= posterHeight) {
+                    if (height <= (posterHeight + (posterHeight shr 2))) {
                         return size
                     }
                 }
