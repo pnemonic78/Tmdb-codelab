@@ -11,11 +11,10 @@ import android.view.ViewTreeObserver
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import com.tmdbcodlab.android.MyApplication
 import com.tmdbcodlab.android.R
 import com.tmdbcodlab.android.api.TmdbApi
 import com.tmdbcodlab.android.data.TmdbRepository
-import com.tmdbcodlab.android.inject.components.DaggerApplicationComponent
-import com.tmdbcodlab.android.inject.modules.ApplicationModule
 import com.tmdbcodlab.android.model.MovieDetails
 import javax.inject.Inject
 
@@ -38,7 +37,7 @@ class MovieDetailFragment : Fragment(), MovieDetailsContract.View {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        DaggerApplicationComponent.builder().applicationModule(ApplicationModule(context!!)).build().inject(this)
+        MyApplication.appComponent.inject(this)
         presenter = MovieDetailsPresenter(repository, this)
     }
 

@@ -13,7 +13,7 @@ import javax.inject.Singleton
 class ApplicationModule(val context: Context) {
 
     @Provides
-    fun provideContext() = context
+    fun provideContext() = context.applicationContext
 
     @Provides
     @Singleton

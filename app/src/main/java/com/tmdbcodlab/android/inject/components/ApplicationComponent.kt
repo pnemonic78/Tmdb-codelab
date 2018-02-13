@@ -13,7 +13,6 @@ import javax.inject.Singleton
 @Component(modules = [ApplicationModule::class, NetworkModule::class])
 interface ApplicationComponent {
     fun inject(app: Application)
-    fun inject(dataSource: TmdbRemoteDataSource)
     fun inject(fragment: MoviesFragment)
     fun inject(fragment: MovieDetailFragment)
 }

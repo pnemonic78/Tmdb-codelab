@@ -7,10 +7,9 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.tmdbcodlab.android.MyApplication
 import com.tmdbcodlab.android.R
 import com.tmdbcodlab.android.data.TmdbRepository
-import com.tmdbcodlab.android.inject.components.DaggerApplicationComponent
-import com.tmdbcodlab.android.inject.modules.ApplicationModule
 import com.tmdbcodlab.android.model.Movie
 import javax.inject.Inject
 
@@ -28,7 +27,7 @@ class MoviesFragment : Fragment(), MoviesContract.View, MoviesAdapter.MovieListe
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        DaggerApplicationComponent.builder().applicationModule(ApplicationModule(context!!)).build().inject(this)
+        MyApplication.appComponent.inject(this)
         presenter = MoviesPresenter(repository, this)
     }
 
