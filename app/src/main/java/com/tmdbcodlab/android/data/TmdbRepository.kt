@@ -38,7 +38,7 @@ class TmdbRepository(private val localRepository: TmdbLocalDataSource,
         return cacheObservable(CACHE_PREFIX_MOVIE_DETAILS + movieId, result)
     }
 
-    @SuppressWarnings("unchecked")
+    @Suppress("UNCHECKED_CAST")
     private fun <T> cacheObservable(key: String, observable: Observable<T>): Observable<T> {
         val cachedObservable: Observable<T>? = cache.get(key) as Observable<T>?
         if (cachedObservable != null) {
