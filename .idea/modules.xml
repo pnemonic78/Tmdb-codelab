@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Tmdbcodelab.iml" filepath="$PROJECT_DIR$/Tmdbcodelab.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Tmdb-codelab.iml" filepath="$PROJECT_DIR$/Tmdb-codelab.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/Tmdb-codelab-app.iml" filepath="$PROJECT_DIR$/app/Tmdb-codelab-app.iml" />
     </modules>
   </component>
 </project>
